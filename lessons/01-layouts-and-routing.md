@@ -27,7 +27,6 @@ const {
 } = Astro.props;
 
 import Footer from './Footer.astro';
-import Aside from '../components/Aside.astro';
 ---
 
 <html lang="en">
@@ -40,9 +39,6 @@ import Aside from '../components/Aside.astro';
       <main class="bg-sky-300 md:w-2/3 lg:w-3/4 px-5 py-40">
         <h1 class="text-2xl md:text-4xl"><slot /></h1>
       </main>
-      <aside class="bg-green-300 md:w-1/3 lg:w-1/4 px-5 py-40">
-        <Aside content={Astro.url.pathname} />
-      </aside>
     </div>
     <Footer />
   </body>
@@ -52,8 +48,10 @@ import Aside from '../components/Aside.astro';
 Notice that `import` works out of the box and also notice `Astro.props`. This is a special, built in object that essentially allows us to send properties to components and then access them. In the code above, if `Astro.props` does <strong>not</strong> contain the `title` or `description` keys, I set them to have default values, otherwise whatever gets sent as props will be used:
 
 ```astro
-<Layout /> <!-- will use the defaults -->
-<Layout title="My Title" /> <!-- will set title to "My Title", description will be the default -->
+<Layout />
+<!-- will use the defaults -->
+<Layout title="My Title" />
+<!-- will set title to "My Title", description will be the default -->
 ```
 
 > If you look carefully there's another built in object being used here, that is `Astro.url`. There are multiple objects that can be accessed from the [Astro object](https://docs.astro.build/en/reference/api-reference/#astro-global).
@@ -64,7 +62,8 @@ Last but not least, please take a look at the `<Head>` astro component. If the p
 
 ```astro
 const title = 'my title';
-<Head title={title} /> <!-- can be simplified to 👇 -->
+<Head title={title} />
+<!-- can be simplified to 👇 -->
 <Head {title} />
 ```
 
@@ -101,33 +100,11 @@ It's important to note that Astro does generate all pages at build time, and wit
 This can be achieved by using `getStaticPaths()` which is a built in method. This method needs to return an array of objects where there's a mandatory `params` object which also needs another mandatory property that should match the dynamic route definition (in the above case it's `destination`):
 
 ```astro
-// src/pages/[destination].astro
----
-const destinations = ['london', 'rome', 'san francisco', 'singapore', 'cairo', 'medellin'];
-export function getStaticPaths() {
-  return destinations.map(destination => ({
-    params: {
-      destination
-    }
-  }));
-}
-
-/*
-returns:
-[{
-  params: {
-    destination: 'london'
-  }
-}, {
-  params: {
-    destination: 'rome'
-  }
-},
-{
-  // etc
-}]
-*/
----
+// src/pages/[destination].astroconst destinations = ['london', 'rome', 'san
+francisco', 'singapore', 'cairo', 'medellin']; export function getStaticPaths()
+{ return destinations.map(destination => ({ params: { destination } })); } /*
+returns: [{ params: { destination: 'london' } }, { params: { destination: 'rome'
+} }, { // etc }] */
 ```
 
 > If you have multipe parameters (i.e. `/src/pages/[city]-[country].astro`), you can pass multiple props to the `params` object:
