@@ -1,0 +1,11 @@
+---
+import Gallery from '../components/Gallery.jsx';
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="React Component">
+  <section class="h-screen"></section>
+  <section>
+    <Gallery client:visible />
+  </section>
+</Layout>

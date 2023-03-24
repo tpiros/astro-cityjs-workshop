@@ -1,0 +1,24 @@
+---
+export const prerender = true;
+import Layout from '../layouts/Layout.astro';
+const response = await fetch('http://127.0.0.1:1337/api/products');
+const { data: products } = await response.json();
+---
+
+<Layout title="Sport Blog">
+  <h1 class="font-bold text-2xl">Products</h1>
+  <ul class="list-inside">
+    {
+      products.map((product) => (
+        <li class="list-disc text-xl">
+          <a
+            class="underline hover:no-underline"
+            href={`/products/${product.id}`}
+          >
+            {product.attributes.name}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</Layout>

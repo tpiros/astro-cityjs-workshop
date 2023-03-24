@@ -1,0 +1,16 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const { data } = Astro.props;
+const { name, height } = data;
+---
+
+<Layout title="Fetch API">
+  <h1 class="font-bold text-3xl">{name}</h1>
+  <p class="text-xl">{name} is {height} cms tall.</p>
+  <p class="text-sm mt-2">
+    This data was provided by <a class="underline" href="https://swapi.dev/"
+      >The Star Wars API</a
+    >
+  </p>
+</Layout>

@@ -1,0 +1,13 @@
+---
+import Layout from './Layout.astro';
+import PostHeader from './PostHeader.astro';
+const { frontmatter } = Astro.props;
+const { title, description, author, date } = frontmatter;
+---
+
+<Layout {title} {description}>
+  <PostHeader {title} {date} {author} />
+  <div class="prose">
+    <slot />
+  </div>
+</Layout>

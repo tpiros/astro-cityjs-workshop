@@ -1,0 +1,32 @@
+[
+  {
+    "publicId": "jamstack-training/travel/france",
+    "title": "Ouf!",
+    "description": "Lorem ipsum dolor sit amet, consectur dolori adipiscing elit, sed do eiusmod tempor nova incididunt ut labore et dolore magna aliqua.",
+    "country": "France"
+  },
+  {
+    "publicId": "jamstack-training/travel/colombia",
+    "title": "País de Parceros",
+    "description": "Lorem ipsum dolor sit amet, consectur dolori adipiscing elit, sed do eiusmod tempor nova incididunt ut labore et dolore magna aliqua.",
+    "country": "Colombia"
+  },
+  {
+    "publicId": "jamstack-training/travel/switzerland",
+    "title": "Hopp Schwiiz Hopp",
+    "description": "Lorem ipsum dolor sit amet, consectur dolori adipiscing elit, sed do eiusmod tempor nova incididunt ut labore et dolore magna aliqua.",
+    "country": "Switzerland"
+  },
+  {
+    "publicId": "jamstack-training/travel/spain",
+    "title": "¡Que guay la fiesta!",
+    "description": "Lorem ipsum dolor sit amet, consectur dolori adipiscing elit, sed do eiusmod tempor nova incididunt ut labore et dolore magna aliqua.",
+    "country": "Spain"
+  },
+  {
+    "publicId": "jamstack-training/travel/italy",
+    "title": "Daje",
+    "description": "Lorem ipsum dolor sit amet, consectur dolori adipiscing elit, sed do eiusmod tempor nova incididunt ut labore et dolore magna aliqua.",
+    "country": "Italy"
+  }
+]

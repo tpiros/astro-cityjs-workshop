@@ -1,0 +1,58 @@
+---
+export const prerender = true;
+import CloudinaryImage from '../components/CloudinaryImage.astro';
+import { Image } from 'astro:assets';
+import colombia from '~/assets/colombia.jpeg';
+import india from '~/assets/india.jpeg';
+import italy from '~/assets/italy.jpeg';
+import spain from '~/assets/spain.jpeg';
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Images">
+  <h1 class="font-bold text-3xl">Image Optimisation</h1>
+  <div class="flex">
+    <div class="flex-1">
+      <p class="p-2">Astro images</p>
+      <Image
+        class="p-2"
+        src={colombia}
+        width={400}
+        alt="Some Text"
+        loading="eager"
+      />
+      <Image
+        class="p-2"
+        src={india}
+        width={400}
+        alt="Some Text"
+        loading="eager"
+      />
+
+      <Image class="p-2" src={italy} width={400} alt="Some Text" />
+
+      <Image class="p-2" src={spain} width={400} alt="Some Text" />
+    </div>
+    <div class="flex-1">
+      <CloudinaryImage
+        publicId="woman"
+        width={250}
+        height={250}
+        findFace={true}
+      />
+      <CloudinaryImage
+        publicId="jamstack-training/kitchen"
+        width={500}
+        height={500}
+        aiCrop={true}
+      />
+      <CloudinaryImage
+        publicId="jamstack-training/shirt_only"
+        underlay={true}
+        logo="jamstack-training:cityjs-logo-tr"
+        text="CityJS"
+      />
+      <!-- </div> -->
+    </div>
+  </div>
+</Layout>

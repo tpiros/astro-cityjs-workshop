@@ -1,0 +1,72 @@
+---
+const links = [
+  {
+    href: '/',
+    label: 'Home',
+    id: '/home',
+  },
+  {
+    href: '/posts',
+    label: 'Blog',
+    id: '/posts',
+  },
+  {
+    href: '/fetch',
+    label: 'Fetch',
+    id: '/fetch',
+  },
+  {
+    href: '/products',
+    label: 'Products',
+    id: '/products',
+  },
+  {
+    href: '/graphql',
+    label: 'GraphQL',
+    id: '/graphql',
+  },
+  {
+    href: '/productsApi',
+    label: 'Products via API',
+    id: '/productsApi',
+  },
+  {
+    href: '/react',
+    label: 'React',
+    id: '/react',
+  },
+  {
+    href: '/image-optimisation',
+    label: 'Image Optimisation',
+    id: '/image-optimisagion',
+  },
+  {
+    href: '/about',
+    label: 'About',
+    id: '/about',
+  },
+];
+---
+
+<header class="bg-amber-400 p-5">
+  <nav>
+    {
+      links.map((link) => (
+        <a
+          class="bg-gradient-to-r from-yellow-200 to-yellow-200
+      bg-no-repeat [background-position:0_88%]
+      [background-size:100%_0.2em]
+      motion-safe:transition-all motion-safe:duration-200
+      hover:[background-size:100%_100%]
+      focus:[background-size:100%_100%] m-2 text-xl font-bold p-2
+    "
+          href={link.href}
+          id={link.id}
+          aria-current="page"
+        >
+          {link.label}
+        </a>
+      ))
+    }
+  </nav>
+</header>

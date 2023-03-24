@@ -1,0 +1,39 @@
+---
+import Layout from '../layouts/Layout.astro';
+const response = await fetch(`${Astro.url.origin}/api/products.json`);
+const { products } = await response.json();
+---
+
+<Layout title="Products via an API call">
+  <h1 class="font-bold text-2xl">Products (via an API)</h1>
+  <ul class="list-inside">
+    {
+      products.map((product) => (
+        <li class="list-disc text-xl">
+          {product.name} (Current stock: {product.inStock}){' '}
+        </li>
+      ))
+    }
+  </ul>
+  <button
+    class="bg-white hover:bg-green-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow mt-2 text-base"
+    id="purchase"
+  >
+    Purchase something</button
+  >
+</Layout>
+<script>
+  const button: HTMLButtonElement = document.querySelector('#purchase');
+  button.addEventListener('click', async () => {
+    const randomProduct = Math.floor(Math.random() * 2) + 1;
+    const response = await fetch(
+      `${location.origin}/api/${randomProduct}.json`,
+      {
+        headers: {
+          'x-api-token': 'abc-123',
+        },
+      }
+    );
+    await response.json();
+  });
+</script>

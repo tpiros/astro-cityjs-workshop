@@ -1,0 +1,24 @@
+---
+export const prerender = true;
+import Layout from '../../layouts/Layout.astro';
+
+const { id } = Astro.params;
+
+const response = await fetch(`http://127.0.0.1:1337/api/products/${id}`);
+const { data: product } = await response.json();
+
+export async function getStaticPaths() {
+  const response = await fetch('http://127.0.0.1:1337/api/products');
+  const { data: products } = await response.json();
+
+  return products.map((product) => ({
+    params: { id: product.id },
+    props: { product },
+  }));
+}
+---
+
+<Layout title={product.attributes.name}>
+  <h1 class="font-bold text-2xl">{product.attributes.name}</h1>
+  <p>Cost: ${product.attributes.price}</p>
+</Layout>

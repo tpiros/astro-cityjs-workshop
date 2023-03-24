@@ -1,0 +1,12 @@
+<footer class="bg-slate-800 mt-auto p-5 text-white">
+  <p>
+    Copyright © <span id="copyright"></span>. All rights reserved. <a
+      class="text-red-300 hover:underline"
+      href="https://tpiros.dev">tpiros.dev</a>
+  </p>
+</footer>
+
+<script>
+  const copyright = document.querySelector('#copyright');
+  copyright.textContent = new Date().getFullYear().toString();
+</script>

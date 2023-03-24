@@ -1,0 +1,90 @@
+---
+import { Cloudinary, Transformation } from '@cloudinary/url-gen';
+import { crop, scale, thumbnail } from '@cloudinary/url-gen/actions/resize';
+import { autoGravity, focusOn } from '@cloudinary/url-gen/qualifiers/gravity';
+import { face, sink } from '@cloudinary/url-gen/qualifiers/focusOn';
+import { format, quality } from '@cloudinary/url-gen/actions/delivery';
+import { image } from '@cloudinary/url-gen/qualifiers/source';
+import { source } from '@cloudinary/url-gen/actions/overlay';
+import { brightness, opacity } from '@cloudinary/url-gen/actions/adjust';
+import { Position } from '@cloudinary/url-gen/qualifiers';
+import { TextStyle } from '@cloudinary/url-gen/qualifiers/textStyle';
+import { focusOn as autoFocusOn } from '@cloudinary/url-gen/qualifiers/autoFocus';
+
+const cld = new Cloudinary({
+  cloud: {
+    cloudName: 'tamas-demo',
+  },
+  url: {
+    secure: true,
+  },
+});
+const {
+  publicId,
+  width,
+  height,
+  findFace = false,
+  underlay = false,
+  aiCrop = false,
+  target = '',
+  logo = '',
+  text = '',
+} = Astro.props;
+
+let myImage = cld
+  .image(publicId)
+  .resize(scale().width(width).height(height))
+  .delivery(format('auto'))
+  .delivery(quality('auto'));
+
+if (findFace) {
+  myImage = cld
+    .image(publicId)
+    .resize(
+      thumbnail()
+        .width(width)
+        .height(height)
+        .zoom(0.75)
+        .gravity(focusOn(face()))
+    )
+    .delivery(format('auto'))
+    .delivery(quality('auto'));
+}
+if (aiCrop && target) {
+  const values = {
+    values: [],
+    delimiter: '',
+    name: target,
+  } as any;
+
+  myImage = cld
+    .image(publicId)
+    .resize(
+      crop()
+        .width(width)
+        .height(height)
+        .aspectRatio('1.0')
+        .gravity(autoGravity().autoFocus(autoFocusOn(values)))
+    )
+    .delivery(format('auto'))
+    .delivery(quality('auto'));
+}
+
+if (underlay && logo && text) {
+  const overlayLogo = logo;
+  const overlayText = text;
+  myImage = cld
+    .image(publicId)
+    .addTransformation(
+      new Transformation().addTransformation(
+        `o_0/l_${overlayLogo},c_scale,w_380,y_-200,x_-5,e_brightness:-20/l_text:Coustard_100_bold:${overlayText},y_0,co_rgb:999999,o_70,c_scale,w_345/l_jamstack-training:shirt_displace,e_displace,x_10,y_10/u_jamstack-training:shirt_only,e_red:-50/u_jamstack-training:model2/l_jamstack-training:heather_texture,o_29`
+      )
+    )
+    .delivery(format('auto'))
+    .delivery(quality('auto'));
+}
+
+const finalImageUrl = myImage.toURL();
+---
+
+<img class="p-2" src={finalImageUrl} alt="A photo" />

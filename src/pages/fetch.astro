@@ -1,0 +1,16 @@
+---
+export const prerender = true;
+import SWCharacter from '../components/SWCharacter.astro';
+
+const randomId = Math.floor(Math.random() * 16) + 1;
+
+let data;
+try {
+  const response = await fetch(`https://swapi.dev/api/people/${randomId}`);
+  data = await response.json();
+} catch (error) {
+  console.log(error);
+}
+---
+
+<SWCharacter {data} />

@@ -1,0 +1,21 @@
+---
+export const prerender = true;
+import { getCollection } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+const posts = await getCollection('blog');
+---
+
+<Layout title="Some Articles">
+  <h1 class="font-bold text-2xl">Blog</h1>
+  <ul class="list-inside">
+    {
+      posts.map((post) => (
+        <li class="list-disc text-xl">
+          <a class="underline hover:no-underline" href={`/posts/${post.slug}`}>
+            {post.data.title}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</Layout>
