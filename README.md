@@ -6,7 +6,6 @@ Welcome to [CityJS London 🇬🇧](https://london.cityjs.org). This workshop wi
 - [Before the Workshop](#-before-the-workshop)
 - [Setup](#-setup)
 - [Lessons](#-lessons)
-- [Support](#-support)
 - [Your Instructor](#-instructor)
 
 # 🤝 Workshop Overview
@@ -59,5 +58,7 @@ Please find the lesson plan for the workshop below.
 There are some routes within this application (e.g. `/graphql`) which require a running GraphQL server. During the workshop some service endpoints will run locally on my machine and after the worskhop you'd have to use a different service, and/or create one on your own.
 
 # 👋 Your Instructor
+
+Feel free to connect with me - I'd be more than happy to answer questions related to Astro after the workshop as well.
 
 - Tamas Piros [LinkedIn](https://linkedin.com/in/tpiros) | [tpiros.dev](https://tpiros.dev)
