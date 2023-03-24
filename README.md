@@ -54,6 +54,10 @@ Please find the lesson plan for the workshop below.
 - [04 - Content Collections](lessons/04-content-collections.md)
 - [05 - Image Optimisation](lessons/05-image-optimisation.md)
 
+## 📝 Note
+
+There are some routes within this application (e.g. `/graphql`) which require a running GraphQL server. During the workshop some service endpoints will run locally on my machine and after the worskhop you'd have to use a different service, and/or create one on your own.
+
 # 👋 Your Instructor
 
 - Tamas Piros [LinkedIn](https://linkedin.com/in/tpiros) | [tpiros.dev](https://tpiros.dev)
