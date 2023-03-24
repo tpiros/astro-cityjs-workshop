@@ -48,10 +48,9 @@ import Footer from './Footer.astro';
 Notice that `import` works out of the box and also notice `Astro.props`. This is a special, built in object that essentially allows us to send properties to components and then access them. In the code above, if `Astro.props` does <strong>not</strong> contain the `title` or `description` keys, I set them to have default values, otherwise whatever gets sent as props will be used:
 
 ```astro
-<Layout />
-<!-- will use the defaults -->
-<Layout title="My Title" />
-<!-- will set title to "My Title", description will be the default -->
+<Layout /> <!-- 👈🏼 will use the defaults -->
+
+<Layout title="My Title" /> <!-- 👈🏼 will set title to "My Title", description will be the default -->
 ```
 
 > If you look carefully there's another built in object being used here, that is `Astro.url`. There are multiple objects that can be accessed from the [Astro object](https://docs.astro.build/en/reference/api-reference/#astro-global).
