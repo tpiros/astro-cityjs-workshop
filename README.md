@@ -5,7 +5,7 @@ Welcome to [CityJS London 🇬🇧](https://london.cityjs.org). This workshop wi
 - [Workshop Overview](#-workshop-overview)
 - [Before the Workshop](#-before-the-workshop)
 - [Setup](#-setup)
-- [Lessons](#-the-lessons)
+- [Lessons](#-lessons)
 - [Support](#-support)
 - [Your Instructor](#-instructor)
 
