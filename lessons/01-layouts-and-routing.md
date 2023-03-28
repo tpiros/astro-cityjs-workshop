@@ -48,9 +48,11 @@ import Footer from './Footer.astro';
 Notice that `import` works out of the box and also notice `Astro.props`. This is a special, built in object that essentially allows us to send properties to components and then access them. In the code above, if `Astro.props` does <strong>not</strong> contain the `title` or `description` keys, I set them to have default values, otherwise whatever gets sent as props will be used:
 
 ```astro
-<Layout /> <!-- 👈🏼 will use the defaults -->
+<Layout />
+<!-- 👈🏼 will use the defaults -->
 
-<Layout title="My Title" /> <!-- 👈🏼 will set title to "My Title", description will be the default -->
+<Layout title="My Title" />
+<!-- 👈🏼 will set title to "My Title", description will be the default -->
 ```
 
 > If you look carefully there's another built in object being used here, that is `Astro.url`. There are multiple objects that can be accessed from the [Astro object](https://docs.astro.build/en/reference/api-reference/#astro-global).
@@ -98,12 +100,15 @@ It's important to note that Astro does generate all pages at build time, and wit
 
 This can be achieved by using `getStaticPaths()` which is a built in method. This method needs to return an array of objects where there's a mandatory `params` object which also needs another mandatory property that should match the dynamic route definition (in the above case it's `destination`):
 
-```astro
-// src/pages/[destination].astroconst destinations = ['london', 'rome', 'san
-francisco', 'singapore', 'cairo', 'medellin']; export function getStaticPaths()
-{ return destinations.map(destination => ({ params: { destination } })); } /*
-returns: [{ params: { destination: 'london' } }, { params: { destination: 'rome'
-} }, { // etc }] */
+```
+// src/pages/[destination].astro
+const destinations = ['london', 'rome', 'sanfrancisco', 'singapore', 'cairo', 'medellin'];
+
+export function getStaticPaths() {
+  return destinations.map(destination => ({ params: { destination } })); }
+  /*
+    returns: [{ params: { destination: 'london' } }, { params: { destination: 'rome'} }, { // etc }]
+  */
 ```
 
 > If you have multipe parameters (i.e. `/src/pages/[city]-[country].astro`), you can pass multiple props to the `params` object:

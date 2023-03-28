@@ -71,7 +71,7 @@ Astro takes this architecture concept to the next level. You get to control when
 
 - `client:load` - high priority, useful for key elements that require immediate interactivity. The JavaScript for the component will be loaded on page load.
 - `client:idle` - low priority, ideal for components requiring less immediacy. The JavaScript for the component will be loaded after either the `requestIdleCallback` or `load` event fired by the browser.
-- `clientvisible` - low priority, ideal for components that are not visible on initial page load and are not above the fold. The component JavaScript is loaded when the component is visible in the viewport (uses the `IntersectionObserver`).
+- `client:visible` - low priority, ideal for components that are not visible on initial page load and are not above the fold. The component JavaScript is loaded when the component is visible in the viewport (uses the `IntersectionObserver`).
 - `client:media` - low priority, ideal for components that are only visible in certain screen sizes. The JavaScript gets loaded when the CSS media query specified is triggered (i.e. `client:media="(max-width: 400px)"`)
 - `client:only` - this attribute skips HTML server-rendering and renders only on the client, but you need to specify the framwork to load because Astro will not know (i.e. `<MyReactComponent client:only="react" />`).
 
@@ -101,9 +101,10 @@ One more cool feature is the fact that you can reference any CSS variable availa
 
 ```astro
 ---
-const foregroundColor = "rgb(221 243 228)";
-const backgroundColor = "rgb(24 121 78)";
+const foregroundColor = 'rgb(221 243 228)';
+const backgroundColor = 'rgb(24 121 78)';
 ---
+
 <style define:vars={{ foregroundColor, backgroundColor }}>
   h1 {
     background-color: var(--backgroundColor);
