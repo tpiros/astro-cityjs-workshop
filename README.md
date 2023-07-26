@@ -1,6 +1,6 @@
 # 🧑‍💻 Ship less JavaScript with Astro
 
-Welcome to [CityJS London 🇬🇧](https://london.cityjs.org). This workshop will teach you the basics of [Astro](https://astro.build).
+Welcome to [CityJS London/Singapore 🇬🇧/🇸🇬](https://cityjsconf.org). This workshop will teach you the basics of [Astro](https://astro.build).
 
 - [Workshop Overview](#-workshop-overview)
 - [Before the Workshop](#-before-the-workshop)
