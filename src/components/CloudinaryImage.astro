@@ -2,11 +2,11 @@
 import { Cloudinary, Transformation } from '@cloudinary/url-gen';
 import { crop, scale, thumbnail } from '@cloudinary/url-gen/actions/resize';
 import { autoGravity, focusOn } from '@cloudinary/url-gen/qualifiers/gravity';
-import { face, sink } from '@cloudinary/url-gen/qualifiers/focusOn';
+import { face } from '@cloudinary/url-gen/qualifiers/focusOn';
 import { format, quality } from '@cloudinary/url-gen/actions/delivery';
-import { image } from '@cloudinary/url-gen/qualifiers/source';
+import { image, text } from '@cloudinary/url-gen/qualifiers/source';
 import { source } from '@cloudinary/url-gen/actions/overlay';
-import { brightness, opacity } from '@cloudinary/url-gen/actions/adjust';
+import { brightness, opacity, red } from '@cloudinary/url-gen/actions/adjust';
 import { Position } from '@cloudinary/url-gen/qualifiers';
 import { TextStyle } from '@cloudinary/url-gen/qualifiers/textStyle';
 import { focusOn as autoFocusOn } from '@cloudinary/url-gen/qualifiers/autoFocus';
@@ -28,14 +28,22 @@ const {
   aiCrop = false,
   target = '',
   logo = '',
-  text = '',
+  customText = '',
 } = Astro.props;
 
-let myImage = cld
-  .image(publicId)
-  .resize(scale().width(width).height(height))
-  .delivery(format('auto'))
-  .delivery(quality('auto'));
+let myImage;
+if (width || height) {
+  myImage = cld
+    .image(publicId)
+    .resize(scale().width(width).height(height))
+    .delivery(format('auto'))
+    .delivery(quality('auto'));
+} else {
+  myImage = cld
+    .image(publicId)
+    .delivery(format('auto'))
+    .delivery(quality('auto'));
+}
 
 if (findFace) {
   myImage = cld
@@ -70,14 +78,48 @@ if (aiCrop && target) {
     .delivery(quality('auto'));
 }
 
-if (underlay && logo && text) {
+if (underlay && logo && customText) {
   const overlayLogo = logo;
-  const overlayText = text;
+  const overlayText = customText;
   myImage = cld
     .image(publicId)
-    .addTransformation(
-      new Transformation().addTransformation(
-        `o_0/l_${overlayLogo},c_scale,w_380,y_-200,x_-5,e_brightness:-20/l_text:Coustard_100_bold:${overlayText},y_0,co_rgb:999999,o_70,c_scale,w_345/l_jamstack-training:shirt_displace,e_displace,x_10,y_10/u_jamstack-training:shirt_only,e_red:-50/u_jamstack-training:model2/l_jamstack-training:heather_texture,o_29`
+    .adjust(opacity(0))
+    .overlay(
+      source(
+        image(overlayLogo).transformation(
+          new Transformation()
+            .resize(scale().width(380))
+            .adjust(brightness(-20))
+        )
+      ).position(new Position().offsetY(-200).offsetX(-5))
+    )
+    .overlay(
+      source(
+        text(overlayText, new TextStyle('Coustard', 100).fontWeight('bold'))
+          .textColor('#000')
+          .transformation(
+            new Transformation().resize(scale().width(365)).adjust(opacity(70))
+          )
+      ).position(new Position().offsetY(0).offsetX(-5))
+    )
+    .overlay(
+      source(image('jamstack-training/shirt_displace')).position(
+        new Position().offsetY(10).offsetX(10).addQualifier('e_displace')
+      )
+    )
+    .underlay(
+      source(
+        image('jamstack-training/shirt_only').transformation(
+          new Transformation().adjust(red().level(-50))
+        )
+      )
+    )
+    .underlay(source(image('jamstack-training/model2')))
+    .overlay(
+      source(
+        image('jamstack-training/heather_texture').transformation(
+          new Transformation().adjust(opacity(29))
+        )
       )
     )
     .delivery(format('auto'))
